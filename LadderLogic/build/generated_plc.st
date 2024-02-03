@@ -11,11 +11,11 @@ PROGRAM program0
     TurntableFrontLimit AT %IX101.0 : BOOL;
     TurntableLimit0 AT %IX101.1 : BOOL;
     TurntableLimit90 AT %IX101.2 : BOOL;
-    LightArray7 AT %IX101.3 : BOOL;
-    Conveyor1 AT %QX100.0 : BOOL;
+    LightArray7SmallBox AT %IX101.3 : BOOL;
+    Convey6m_0 AT %QX100.0 : BOOL;
     Turntable0RollPlus AT %QX100.1 : BOOL;
     Turntable0Turn AT %QX100.2 : BOOL;
-    Conveyor2 AT %QX100.3 : BOOL;
+    Convey6m_1 AT %QX100.3 : BOOL;
   END_VAR
   VAR
     RS0 : RS;
@@ -33,6 +33,13 @@ PROGRAM program0
     RS7 : RS;
     RS8 : RS;
     RS9 : RS;
+  END_VAR
+  VAR
+    StackLightGreen AT %QX100.4 : BOOL;
+    StackLightYellow AT %QX100.5 : BOOL;
+    StackLightRed AT %QX100.6 : BOOL;
+  END_VAR
+  VAR
     R_TRIG1 : R_TRIG;
     R_TRIG2 : R_TRIG;
     R_TRIG3 : R_TRIG;
@@ -73,11 +80,13 @@ PROGRAM program0
   R_TRIG7(CLK := FactoryIOReset);
   RS2(S := R_TRIG5.Q, R1 := NOT(EmergencyStop) OR R_TRIG6.Q OR R_TRIG7.Q);
   RS1(S := EmergencyStop AND NOT(FactoryIOReset) AND TurntableLimit0 AND RS0.Q1, R1 := NOT(RetroReflect0) AND (F_TRIG1.Q OR RS2.Q1 OR R_TRIG4.Q) OR NOT(EmergencyStop) OR R_TRIG3.Q);
-  Conveyor1 := RS1.Q1;
+  Convey6m_0 := RS1.Q1;
+  StackLightGreen := RS1.Q1;
+  StackLightRed := NOT(RS1.Q1);
   F_TRIG2(CLK := RetroReflect1);
   R_TRIG8(CLK := FactoryIOReset);
   F_TRIG3(CLK := RetroReflect2);
-  RS3(S := F_TRIG2.Q AND LightArray7, R1 := F_TRIG3.Q OR NOT(EmergencyStop) OR R_TRIG8.Q);
+  RS3(S := F_TRIG2.Q AND LightArray7SmallBox, R1 := F_TRIG3.Q OR NOT(EmergencyStop) OR R_TRIG8.Q);
   SmallBox := RS3.Q1;
   R_TRIG9(CLK := Start);
   R_TRIG10(CLK := FactoryIOReset);
@@ -103,7 +112,7 @@ PROGRAM program0
   R_TRIG21(CLK := RetroReflect3);
   R_TRIG22(CLK := FactoryIOReset);
   RS9(S := EmergencyStop AND (TurntableLimit90 AND SmallBox OR RS8.Q1), R1 := NOT(EmergencyStop) OR R_TRIG21.Q OR R_TRIG22.Q);
-  Conveyor2 := RS9.Q1;
+  Convey6m_1 := RS9.Q1;
 END_PROGRAM
 
 

@@ -223,16 +223,16 @@ void PROGRAM0_init__(PROGRAM0 *data__, BOOL retain) {
   __INIT_LOCATED_VALUE(data__->TURNTABLELIMIT0,__BOOL_LITERAL(FALSE))
   __INIT_LOCATED(BOOL,__IX101_2,data__->TURNTABLELIMIT90,retain)
   __INIT_LOCATED_VALUE(data__->TURNTABLELIMIT90,__BOOL_LITERAL(FALSE))
-  __INIT_LOCATED(BOOL,__IX101_3,data__->LIGHTARRAY7,retain)
-  __INIT_LOCATED_VALUE(data__->LIGHTARRAY7,__BOOL_LITERAL(FALSE))
-  __INIT_LOCATED(BOOL,__QX100_0,data__->CONVEYOR1,retain)
-  __INIT_LOCATED_VALUE(data__->CONVEYOR1,__BOOL_LITERAL(FALSE))
+  __INIT_LOCATED(BOOL,__IX101_3,data__->LIGHTARRAY7SMALLBOX,retain)
+  __INIT_LOCATED_VALUE(data__->LIGHTARRAY7SMALLBOX,__BOOL_LITERAL(FALSE))
+  __INIT_LOCATED(BOOL,__QX100_0,data__->CONVEY6M_0,retain)
+  __INIT_LOCATED_VALUE(data__->CONVEY6M_0,__BOOL_LITERAL(FALSE))
   __INIT_LOCATED(BOOL,__QX100_1,data__->TURNTABLE0ROLLPLUS,retain)
   __INIT_LOCATED_VALUE(data__->TURNTABLE0ROLLPLUS,__BOOL_LITERAL(FALSE))
   __INIT_LOCATED(BOOL,__QX100_2,data__->TURNTABLE0TURN,retain)
   __INIT_LOCATED_VALUE(data__->TURNTABLE0TURN,__BOOL_LITERAL(FALSE))
-  __INIT_LOCATED(BOOL,__QX100_3,data__->CONVEYOR2,retain)
-  __INIT_LOCATED_VALUE(data__->CONVEYOR2,__BOOL_LITERAL(FALSE))
+  __INIT_LOCATED(BOOL,__QX100_3,data__->CONVEY6M_1,retain)
+  __INIT_LOCATED_VALUE(data__->CONVEY6M_1,__BOOL_LITERAL(FALSE))
   RS_init__(&data__->RS0,retain);
   RS_init__(&data__->RS1,retain);
   RS_init__(&data__->RS2,retain);
@@ -244,6 +244,12 @@ void PROGRAM0_init__(PROGRAM0 *data__, BOOL retain) {
   RS_init__(&data__->RS7,retain);
   RS_init__(&data__->RS8,retain);
   RS_init__(&data__->RS9,retain);
+  __INIT_LOCATED(BOOL,__QX100_4,data__->STACKLIGHTGREEN,retain)
+  __INIT_LOCATED_VALUE(data__->STACKLIGHTGREEN,__BOOL_LITERAL(FALSE))
+  __INIT_LOCATED(BOOL,__QX100_5,data__->STACKLIGHTYELLOW,retain)
+  __INIT_LOCATED_VALUE(data__->STACKLIGHTYELLOW,__BOOL_LITERAL(FALSE))
+  __INIT_LOCATED(BOOL,__QX100_6,data__->STACKLIGHTRED,retain)
+  __INIT_LOCATED_VALUE(data__->STACKLIGHTRED,__BOOL_LITERAL(FALSE))
   R_TRIG_init__(&data__->R_TRIG1,retain);
   R_TRIG_init__(&data__->R_TRIG2,retain);
   R_TRIG_init__(&data__->R_TRIG3,retain);
@@ -302,14 +308,16 @@ void PROGRAM0_body__(PROGRAM0 *data__) {
   __SET_VAR(data__->RS1.,S,,(((__GET_LOCATED(data__->EMERGENCYSTOP,) && !(__GET_LOCATED(data__->FACTORYIORESET,))) && __GET_LOCATED(data__->TURNTABLELIMIT0,)) && __GET_VAR(data__->RS0.Q1,)));
   __SET_VAR(data__->RS1.,R1,,(((!(__GET_LOCATED(data__->RETROREFLECT0,)) && ((__GET_VAR(data__->F_TRIG1.Q,) || __GET_VAR(data__->RS2.Q1,)) || __GET_VAR(data__->R_TRIG4.Q,))) || !(__GET_LOCATED(data__->EMERGENCYSTOP,))) || __GET_VAR(data__->R_TRIG3.Q,)));
   RS_body__(&data__->RS1);
-  __SET_LOCATED(data__->,CONVEYOR1,,__GET_VAR(data__->RS1.Q1,));
+  __SET_LOCATED(data__->,CONVEY6M_0,,__GET_VAR(data__->RS1.Q1,));
+  __SET_LOCATED(data__->,STACKLIGHTGREEN,,__GET_VAR(data__->RS1.Q1,));
+  __SET_LOCATED(data__->,STACKLIGHTRED,,!(__GET_VAR(data__->RS1.Q1,)));
   __SET_VAR(data__->F_TRIG2.,CLK,,__GET_LOCATED(data__->RETROREFLECT1,));
   F_TRIG_body__(&data__->F_TRIG2);
   __SET_VAR(data__->R_TRIG8.,CLK,,__GET_LOCATED(data__->FACTORYIORESET,));
   R_TRIG_body__(&data__->R_TRIG8);
   __SET_VAR(data__->F_TRIG3.,CLK,,__GET_LOCATED(data__->RETROREFLECT2,));
   F_TRIG_body__(&data__->F_TRIG3);
-  __SET_VAR(data__->RS3.,S,,(__GET_VAR(data__->F_TRIG2.Q,) && __GET_LOCATED(data__->LIGHTARRAY7,)));
+  __SET_VAR(data__->RS3.,S,,(__GET_VAR(data__->F_TRIG2.Q,) && __GET_LOCATED(data__->LIGHTARRAY7SMALLBOX,)));
   __SET_VAR(data__->RS3.,R1,,((__GET_VAR(data__->F_TRIG3.Q,) || !(__GET_LOCATED(data__->EMERGENCYSTOP,))) || __GET_VAR(data__->R_TRIG8.Q,)));
   RS_body__(&data__->RS3);
   __SET_VAR(data__->,SMALLBOX,,__GET_VAR(data__->RS3.Q1,));
@@ -365,7 +373,7 @@ void PROGRAM0_body__(PROGRAM0 *data__) {
   __SET_VAR(data__->RS9.,S,,(__GET_LOCATED(data__->EMERGENCYSTOP,) && ((__GET_LOCATED(data__->TURNTABLELIMIT90,) && __GET_VAR(data__->SMALLBOX,)) || __GET_VAR(data__->RS8.Q1,))));
   __SET_VAR(data__->RS9.,R1,,((!(__GET_LOCATED(data__->EMERGENCYSTOP,)) || __GET_VAR(data__->R_TRIG21.Q,)) || __GET_VAR(data__->R_TRIG22.Q,)));
   RS_body__(&data__->RS9);
-  __SET_LOCATED(data__->,CONVEYOR2,,__GET_VAR(data__->RS9.Q1,));
+  __SET_LOCATED(data__->,CONVEY6M_1,,__GET_VAR(data__->RS9.Q1,));
 
   goto __end;
 

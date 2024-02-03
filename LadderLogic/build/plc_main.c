@@ -128,6 +128,12 @@ IEC_BOOL var14;
 IEC_BOOL *__QX100_2 = &var14;
 IEC_BOOL var15;
 IEC_BOOL *__QX100_3 = &var15;
+IEC_BOOL var16;
+IEC_BOOL *__QX100_4 = &var16;
+IEC_BOOL var17;
+IEC_BOOL *__QX100_5 = &var17;
+IEC_BOOL var18;
+IEC_BOOL *__QX100_6 = &var18;
 /**
  * Win32 specific code
  **/
