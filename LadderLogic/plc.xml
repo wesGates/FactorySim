@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <project xmlns:ns1="http://www.plcopen.org/xml/tc6_0201" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.plcopen.org/xml/tc6_0201">
   <fileHeader companyName="Unknown" productName="Unnamed" productVersion="1" creationDateTime="2024-01-22T13:26:01"/>
-  <contentHeader name="Unnamed" modificationDateTime="2024-02-03T12:21:20">
+  <contentHeader name="Unnamed" modificationDateTime="2024-02-03T13:05:24">
     <coordinateInfo>
       <fbd>
         <scaling x="10" y="10"/>
@@ -133,6 +133,14 @@
                 <xhtml:p><![CDATA[Starts FALSE]]></xhtml:p>
               </documentation>
             </variable>
+            <variable name="Material">
+              <type>
+                <BOOL/>
+              </type>
+              <documentation>
+                <xhtml:p><![CDATA[Starts FALSE]]></xhtml:p>
+              </documentation>
+            </variable>
           </inOutVars>
           <localVars>
             <variable name="RS3">
@@ -185,6 +193,13 @@
             <variable name="StackLightRed" address="%QX100.6">
               <type>
                 <BOOL/>
+              </type>
+            </variable>
+          </localVars>
+          <localVars>
+            <variable name="RS10">
+              <type>
+                <derived name="RS"/>
               </type>
             </variable>
           </localVars>
@@ -505,12 +520,20 @@
               </connectionPointIn>
               <connectionPointIn>
                 <relPosition x="0" y="1740"/>
+                <connection refLocalId="91">
+                  <position x="1190" y="1920"/>
+                  <position x="1121" y="1920"/>
+                </connection>
               </connectionPointIn>
               <connectionPointIn>
                 <relPosition x="0" y="1780"/>
               </connectionPointIn>
               <connectionPointIn>
                 <relPosition x="0" y="1820"/>
+                <connection refLocalId="92">
+                  <position x="1190" y="2000"/>
+                  <position x="1121" y="2000"/>
+                </connection>
               </connectionPointIn>
               <connectionPointIn>
                 <relPosition x="0" y="1860"/>
@@ -1739,13 +1762,6 @@ This is combination with the pallet reaching the front of the turntable causes i
                 <xhtml:p><![CDATA[The second conveyor will turn on when a Small Box is detected, and the Turntable has rotated to the 90-degree position. It turns off when the pallet has gone into the receiver and disappeared.]]></xhtml:p>
               </content>
             </comment>
-            <comment localId="70" height="90" width="260">
-              <position x="0" y="1350"/>
-              <content>
-                <xhtml:p><![CDATA[!!! Check this RetroReflect2 connection in case of issues with the turntable turning.
-]]></xhtml:p>
-              </content>
-            </comment>
             <contact localId="74" height="20" width="21" negated="false" edge="rising">
               <position x="350" y="950"/>
               <connectionPointIn>
@@ -2066,13 +2082,6 @@ This is combination with the pallet reaching the front of the turntable causes i
                 <relPosition x="0" y="1980"/>
               </connectionPointIn>
             </rightPowerRail>
-            <comment localId="81" height="40" width="140">
-              <position x="680" y="70"/>
-              <content>
-                <xhtml:p><![CDATA[ORIGINAL SETUP
-]]></xhtml:p>
-              </content>
-            </comment>
             <coil localId="89" height="20" width="21" negated="false">
               <position x="1110" y="270"/>
               <connectionPointIn>
@@ -2105,6 +2114,164 @@ This is combination with the pallet reaching the front of the turntable causes i
               </connectionPointOut>
               <variable>StackLightRed</variable>
             </coil>
+            <contact localId="31" height="20" width="21" negated="true" executionOrderId="0">
+              <position x="335" y="1910"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="1">
+                  <position x="335" y="1920"/>
+                  <position x="270" y="1920"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>LightArray7SmallBox</variable>
+            </contact>
+            <contact localId="71" height="20" width="21" negated="false" edge="falling" executionOrderId="0">
+              <position x="505" y="1910"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="31">
+                  <position x="505" y="1920"/>
+                  <position x="356" y="1920"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>RetroReflect1</variable>
+            </contact>
+            <block localId="72" typeName="RS" instanceName="RS10" height="60" width="50" executionOrderId="0">
+              <position x="945" y="1890"/>
+              <inputVariables>
+                <variable formalParameter="S">
+                  <connectionPointIn>
+                    <relPosition x="0" y="30"/>
+                    <connection refLocalId="71">
+                      <position x="945" y="1920"/>
+                      <position x="526" y="1920"/>
+                    </connection>
+                  </connectionPointIn>
+                </variable>
+                <variable formalParameter="R1">
+                  <connectionPointIn>
+                    <relPosition x="0" y="50"/>
+                    <connection refLocalId="76">
+                      <position x="945" y="1940"/>
+                      <position x="630" y="1940"/>
+                      <position x="630" y="1960"/>
+                      <position x="356" y="1960"/>
+                    </connection>
+                    <connection refLocalId="75">
+                      <position x="945" y="1940"/>
+                      <position x="630" y="1940"/>
+                      <position x="630" y="2000"/>
+                      <position x="356" y="2000"/>
+                    </connection>
+                    <connection refLocalId="77">
+                      <position x="945" y="1940"/>
+                      <position x="630" y="1940"/>
+                      <position x="630" y="2040"/>
+                      <position x="351" y="2040"/>
+                    </connection>
+                  </connectionPointIn>
+                </variable>
+              </inputVariables>
+              <inOutVariables/>
+              <outputVariables>
+                <variable formalParameter="Q1">
+                  <connectionPointOut>
+                    <relPosition x="50" y="30"/>
+                  </connectionPointOut>
+                </variable>
+              </outputVariables>
+            </block>
+            <contact localId="75" height="20" width="21" negated="true" executionOrderId="0">
+              <position x="335" y="1990"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="1">
+                  <position x="335" y="2000"/>
+                  <position x="270" y="2000"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>EmergencyStop</variable>
+            </contact>
+            <contact localId="76" height="20" width="21" negated="false" edge="rising" executionOrderId="0">
+              <position x="335" y="1950"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="1">
+                  <position x="335" y="1960"/>
+                  <position x="270" y="1960"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>FactoryIOReset</variable>
+            </contact>
+            <coil localId="91" height="20" width="21" negated="false">
+              <position x="1100" y="1910"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="72" formalParameter="Q1">
+                  <position x="1100" y="1920"/>
+                  <position x="995" y="1920"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>Material</variable>
+            </coil>
+            <coil localId="92" height="20" width="21" negated="false">
+              <position x="1100" y="1990"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="72" formalParameter="Q1">
+                  <position x="1100" y="2000"/>
+                  <position x="1032" y="2000"/>
+                  <position x="1032" y="1920"/>
+                  <position x="995" y="1920"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>StackLightYellow</variable>
+            </coil>
+            <comment localId="93" height="60" width="220">
+              <position x="10" y="1920"/>
+              <content>
+                <xhtml:p><![CDATA[Identifying turntable object
+]]></xhtml:p>
+              </content>
+            </comment>
+            <contact localId="77" height="20" width="21" negated="false" edge="falling" executionOrderId="0">
+              <position x="330" y="2030"/>
+              <connectionPointIn>
+                <relPosition x="0" y="10"/>
+                <connection refLocalId="1">
+                  <position x="330" y="2040"/>
+                  <position x="270" y="2040"/>
+                </connection>
+              </connectionPointIn>
+              <connectionPointOut>
+                <relPosition x="21" y="10"/>
+              </connectionPointOut>
+              <variable>RetroReflect2</variable>
+            </contact>
+            <comment localId="94" height="130" width="440">
+              <position x="1250" y="1910"/>
+              <content>
+                <xhtml:p><![CDATA[If the light array 7, which is used to detect a small box, is not 'on', that means a material is on the turntable, so the "material" variable is set to HIGH and the yellow stack light is turned on.]]></xhtml:p>
+              </content>
+            </comment>
           </LD>
         </body>
       </pou>

@@ -237,6 +237,7 @@ void PROGRAM0_init__(PROGRAM0 *data__, BOOL retain) {
   RS_init__(&data__->RS1,retain);
   RS_init__(&data__->RS2,retain);
   __INIT_VAR(data__->SMALLBOX,__BOOL_LITERAL(FALSE),retain)
+  __INIT_VAR(data__->MATERIAL,__BOOL_LITERAL(FALSE),retain)
   RS_init__(&data__->RS3,retain);
   RS_init__(&data__->RS4,retain);
   RS_init__(&data__->RS5,retain);
@@ -250,6 +251,7 @@ void PROGRAM0_init__(PROGRAM0 *data__, BOOL retain) {
   __INIT_LOCATED_VALUE(data__->STACKLIGHTYELLOW,__BOOL_LITERAL(FALSE))
   __INIT_LOCATED(BOOL,__QX100_6,data__->STACKLIGHTRED,retain)
   __INIT_LOCATED_VALUE(data__->STACKLIGHTRED,__BOOL_LITERAL(FALSE))
+  RS_init__(&data__->RS10,retain);
   R_TRIG_init__(&data__->R_TRIG1,retain);
   R_TRIG_init__(&data__->R_TRIG2,retain);
   R_TRIG_init__(&data__->R_TRIG3,retain);
@@ -277,6 +279,9 @@ void PROGRAM0_init__(PROGRAM0 *data__, BOOL retain) {
   R_TRIG_init__(&data__->R_TRIG20,retain);
   R_TRIG_init__(&data__->R_TRIG21,retain);
   R_TRIG_init__(&data__->R_TRIG22,retain);
+  F_TRIG_init__(&data__->F_TRIG6,retain);
+  R_TRIG_init__(&data__->R_TRIG23,retain);
+  F_TRIG_init__(&data__->F_TRIG7,retain);
 }
 
 // Code part
@@ -374,6 +379,17 @@ void PROGRAM0_body__(PROGRAM0 *data__) {
   __SET_VAR(data__->RS9.,R1,,((!(__GET_LOCATED(data__->EMERGENCYSTOP,)) || __GET_VAR(data__->R_TRIG21.Q,)) || __GET_VAR(data__->R_TRIG22.Q,)));
   RS_body__(&data__->RS9);
   __SET_LOCATED(data__->,CONVEY6M_1,,__GET_VAR(data__->RS9.Q1,));
+  __SET_VAR(data__->F_TRIG6.,CLK,,__GET_LOCATED(data__->RETROREFLECT1,));
+  F_TRIG_body__(&data__->F_TRIG6);
+  __SET_VAR(data__->R_TRIG23.,CLK,,__GET_LOCATED(data__->FACTORYIORESET,));
+  R_TRIG_body__(&data__->R_TRIG23);
+  __SET_VAR(data__->F_TRIG7.,CLK,,__GET_LOCATED(data__->RETROREFLECT2,));
+  F_TRIG_body__(&data__->F_TRIG7);
+  __SET_VAR(data__->RS10.,S,,(__GET_VAR(data__->F_TRIG6.Q,) && !(__GET_LOCATED(data__->LIGHTARRAY7SMALLBOX,))));
+  __SET_VAR(data__->RS10.,R1,,((__GET_VAR(data__->F_TRIG7.Q,) || !(__GET_LOCATED(data__->EMERGENCYSTOP,))) || __GET_VAR(data__->R_TRIG23.Q,)));
+  RS_body__(&data__->RS10);
+  __SET_VAR(data__->,MATERIAL,,__GET_VAR(data__->RS10.Q1,));
+  __SET_LOCATED(data__->,STACKLIGHTYELLOW,,__GET_VAR(data__->RS10.Q1,));
 
   goto __end;
 

@@ -24,6 +24,7 @@ PROGRAM program0
   END_VAR
   VAR_IN_OUT
     SmallBox : BOOL;
+    Material : BOOL;
   END_VAR
   VAR
     RS3 : RS;
@@ -40,6 +41,7 @@ PROGRAM program0
     StackLightRed AT %QX100.6 : BOOL;
   END_VAR
   VAR
+    RS10 : RS;
     R_TRIG1 : R_TRIG;
     R_TRIG2 : R_TRIG;
     R_TRIG3 : R_TRIG;
@@ -67,6 +69,9 @@ PROGRAM program0
     R_TRIG20 : R_TRIG;
     R_TRIG21 : R_TRIG;
     R_TRIG22 : R_TRIG;
+    F_TRIG6 : F_TRIG;
+    R_TRIG23 : R_TRIG;
+    F_TRIG7 : F_TRIG;
   END_VAR
 
   R_TRIG1(CLK := Start);
@@ -113,6 +118,12 @@ PROGRAM program0
   R_TRIG22(CLK := FactoryIOReset);
   RS9(S := EmergencyStop AND (TurntableLimit90 AND SmallBox OR RS8.Q1), R1 := NOT(EmergencyStop) OR R_TRIG21.Q OR R_TRIG22.Q);
   Convey6m_1 := RS9.Q1;
+  F_TRIG6(CLK := RetroReflect1);
+  R_TRIG23(CLK := FactoryIOReset);
+  F_TRIG7(CLK := RetroReflect2);
+  RS10(S := F_TRIG6.Q AND NOT(LightArray7SmallBox), R1 := F_TRIG7.Q OR NOT(EmergencyStop) OR R_TRIG23.Q);
+  Material := RS10.Q1;
+  StackLightYellow := RS10.Q1;
 END_PROGRAM
 
 
