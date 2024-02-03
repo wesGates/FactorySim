@@ -44,11 +44,6 @@ PROGRAM program0
   END_VAR
   VAR
     RS10 : RS;
-  END_VAR
-  VAR
-    DigitalDisplay0 AT %QW100 : INT;
-  END_VAR
-  VAR
     R_TRIG1 : R_TRIG;
     R_TRIG2 : R_TRIG;
     R_TRIG3 : R_TRIG;

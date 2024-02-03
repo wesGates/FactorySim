@@ -138,6 +138,8 @@ IEC_BOOL var19;
 IEC_BOOL *__QX100_5 = &var19;
 IEC_BOOL var20;
 IEC_BOOL *__QX100_6 = &var20;
+IEC_INT var21;
+IEC_INT *__QW100 = &var21;
 /**
  * Win32 specific code
  **/
